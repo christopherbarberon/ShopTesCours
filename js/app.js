@@ -36,4 +36,20 @@ function addItemToCart(img, title, price) {
     newTdTitle.innerHTML = title;
     var newTdPrice = newTr.insertCell(-1);
     newTdPrice.innerHTML = price;
+<<<<<<< Updated upstream
+=======
+}
+
+function quantityInputs() {
+    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+    for (var i = 0; i < quantityInputs.length; i++) {
+        var input = quantityInputs[i]
+        input.addEventListener('change', function quantityChanged(event) {
+            var input = event.target
+            if (isNaN(input.value) || input.value <= 0) {
+                input.value = 1
+            }
+        })
+    }
+>>>>>>> Stashed changes
 }
