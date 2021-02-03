@@ -1,8 +1,9 @@
-// Management of the add to cart button
+// Management of the add to cart button : recovery of the localStorage + notification message 
 function addToCartButtons() {
     var addToCartButtons = document.getElementsByClassName('add-to-cart');
     for (var i = 0; i < addToCartButtons.length; i++) {
         var button = addToCartButtons[i]
+        var px = 0;
         button.addEventListener('click', event => {
             let panier = getLocalStorage();
             let id = event.target.getAttribute('data-id');
@@ -10,7 +11,19 @@ function addToCartButtons() {
             localStorage.setItem('panier', JSON.stringify(panier));
             addToCartClicked(event);
             console.log(panier);
-            Mymsg(COURSES[id].title + " a été ajouté au panier !", 3000);
+
+            if (px <= 60) {
+                if (px == 0) {
+                    Mymsg(COURSES[id].title + " a été ajouté au panier !", 3000, px);
+                } else {
+                    Mymsg(COURSES[id].title + " a été ajouté au panier !", 3000, px);
+                }
+                px = px +15;
+            } else {
+                px = 0;
+                Mymsg(COURSES[id].title + " a été ajouté au panier !", 3000, px);
+                px = px + 15;
+            }
         }) 
     }
 }
@@ -18,7 +31,7 @@ function addToCartButtons() {
 addToCartButtons();
 
 // Retrieving the information of the articles selected thanks to the button "add to cart"
-//Param String
+// Param event(object) : corresponds to the event produced at the time of the click
 function addToCartClicked(event) {
     var button = event.target;
     var dataId = button.getAttribute('data-id');
@@ -33,7 +46,9 @@ function addToCartClicked(event) {
 }
 
 // Add items to cart 
-// Param Src , String, String
+// Param img (Src) : corresponds to the image of the course
+// Param title(String) : corresponds to the title of the course
+// Param price(String) : corresponds to the price of the course
 function addItemToCart(img, title, price) {
     var cartTableBody = document.getElementsByTagName('tbody')[0];
     var newTr = cartTableBody.insertRow(-1);
@@ -82,9 +97,14 @@ function retrieveCart() {
 
 retrieveCart();
 
-function Mymsg(msg,duration) {
+// Display a notification when an item is added to the cart
+// Param msg(String) : corresponds to the message of the notification
+// Param duration(int) : corresponds to the duration of the notification
+// Param px(int) : corresponds to the position of the notification, starting from the top
+function Mymsg(msg,duration, px) {
+    console.log(px)
     var alt = document.createElement("div");
-    alt.setAttribute("style","position:absolute;top:5%;left:80%;border:1px solid rgba(0,0,0,0.25);padding:1% 5% 1% 5%;box-shadow:0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);margin-right:1%");
+    alt.setAttribute("style","position:absolute;top:"+px+"%;left:80%;border:1px solid rgba(0,0,0,0.25);padding:1% 5% 1% 5%;box-shadow:0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);margin-right:1%;margin-top:1%");
     alt.innerHTML = msg;
     setTimeout(function(){ alt.parentNode.removeChild(alt);},duration);
     document.body.appendChild(alt);
