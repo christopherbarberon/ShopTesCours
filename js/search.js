@@ -1,3 +1,4 @@
+// Management of the search bar which displays or makes items disappear
 function getValue() {
     let input = document.getElementsByTagName('input')[0];
     var noCourse = document.getElementById('no_course');
