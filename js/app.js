@@ -52,11 +52,18 @@ function getLocalStorage() {
 
 function clearCart() {
     let buttonclearCart = document.getElementById('empty-cart');
+<<<<<<< Updated upstream
     let cartTableBody = document.getElementById('cart-table');
     buttonclearCart.addEventListener('click', event => {
         localStorage.clear();
         var tbody = cartTableBody.childNodes[3];
         tbody.innerHTML = "";
+=======
+    let cartTableBody = document.getElementsByTagName('tbody');
+    buttonclearCart.addEventListener('click', event => {
+        localStorage.clear();
+        cartTableBody.remove();
+>>>>>>> Stashed changes
     }) 
 }
 
