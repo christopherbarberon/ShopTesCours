@@ -52,19 +52,22 @@ function getLocalStorage() {
 
 function clearCart() {
     let buttonclearCart = document.getElementById('empty-cart');
-<<<<<<< Updated upstream
     let cartTableBody = document.getElementById('cart-table');
     buttonclearCart.addEventListener('click', event => {
         localStorage.clear();
         var tbody = cartTableBody.childNodes[3];
         tbody.innerHTML = "";
-=======
-    let cartTableBody = document.getElementsByTagName('tbody');
-    buttonclearCart.addEventListener('click', event => {
-        localStorage.clear();
-        cartTableBody.remove();
->>>>>>> Stashed changes
     }) 
 }
 
 clearCart();
+
+function retrieveCart() {
+    var panier = getLocalStorage();
+    for (var i = 0; i < panier.length; i++) {
+        var src = "../img/courses/" + COURSES[panier[i]].img;
+        addItemToCart(src, COURSES[panier[i]].title, COURSES[panier[i]].price);
+    }
+}
+
+retrieveCart();
