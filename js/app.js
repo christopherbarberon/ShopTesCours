@@ -28,8 +28,6 @@ function addToCartButtons() {
     }
 }
 
-addToCartButtons();
-
 // Retrieving the information of the articles selected thanks to the button "add to cart"
 // Param event(object) : corresponds to the event produced at the time of the click
 function addToCartClicked(event) {
@@ -116,10 +114,92 @@ function addOrderButton() {
     var buttonOrder = document.createElement('a');
     buttonOrder.setAttribute('href', 'commande.html');
     buttonOrder.setAttribute('class', 'button u-full-width');
+    buttonOrder.setAttribute('id', 'buttonOrder');
     buttonOrder.innerHTML = 'Commander';
     cart.appendChild(buttonOrder);
+
+/*
+    var panier = getLocalStorage();
+    var buttonOrder = getElementById('buttonOrder');
+    if (panier.length == 0) {
+        console.log('DANS LE IF ' + panier.length);
+        buttonOrder.setAttribute('href', 'javascript: void(0)');
+    } else {
+        console.log('DANS LE ELSE ' + panier.length);
+        buttonOrder.setAttribute('href', 'commande.html');
+    }
+*/
 }
+
 addOrderButton();
 
+function createCourseItem() {
+    var coursesContainer = document.getElementsByClassName('courses__container')[0];
 
+    for (var i = 1; i < Object.keys(COURSES).length+1; i++) {
+        var newDivCourseItem = document.createElement('div');
+        newDivCourseItem.setAttribute('class', 'course__item');
+        coursesContainer.appendChild(newDivCourseItem);
 
+        var newFigureCours = document.createElement('figure');
+        newFigureCours.setAttribute('class', 'course_img');
+        newDivCourseItem.appendChild(newFigureCours);
+
+        var newImgCours = document.createElement('img');
+        newImgCours.setAttribute('src', 'img/courses/' + COURSES[i].img);
+        newFigureCours.appendChild(newImgCours);
+
+        var newDivInfoCard = document.createElement('div');
+        newDivInfoCard.setAttribute('class', 'info__card');
+        newDivCourseItem.appendChild(newDivInfoCard);
+
+        var newTitle = document.createElement('h4');
+        newTitle.innerHTML = COURSES[i].title;
+        newDivInfoCard.appendChild(newTitle);
+
+        var newFigureMark = document.createElement('figure');
+        newFigureMark.setAttribute('class', 'mark m_' + COURSES[i].mark);
+        newDivInfoCard.appendChild(newFigureMark);
+
+        var newImgRates = document.createElement('img');
+        newImgRates.setAttribute('src', 'img/rates.png');
+        newFigureMark.appendChild(newImgRates);
+
+        var newPPrice = document.createElement('p');
+        newDivInfoCard.appendChild(newPPrice);
+        
+        var newSpanPrice = document.createElement('span');
+        newSpanPrice.setAttribute('class', 'price');
+        newSpanPrice.innerHTML = COURSES[i].initial_price;
+        newPPrice.appendChild(newSpanPrice);
+
+        var newSpanDiscount = document.createElement('span');
+        newSpanDiscount.setAttribute('class', 'discount');
+        newSpanDiscount.innerHTML = COURSES[i].price;
+        newPPrice.appendChild(newSpanDiscount);
+
+        var newPQuantity = document.createElement('p');
+        newDivInfoCard.appendChild(newPQuantity);
+
+        var newSpanQuantity = document.createElement('span');
+        newSpanQuantity.setAttribute('class', 'stock');
+        newSpanQuantity.innerHTML = 'Disponible: ' + COURSES[i].stock;
+        newPQuantity.appendChild(newSpanQuantity);
+        
+        newAAddToCart = document.createElement('a');
+        newAAddToCart.setAttribute('href', '#');
+        newAAddToCart.setAttribute('class', 'add-to-cart');
+        newAAddToCart.setAttribute('data-id', COURSES[i].id);
+        newAAddToCart.innerHTML = 'Ajouter au panier ';
+
+        newIFa = document.createElement('i');
+        newIFa.setAttribute('class', 'fa fa-cart-plus');
+
+        newAAddToCart.appendChild(newIFa);
+        newDivInfoCard.appendChild(newAAddToCart);
+    }
+}
+
+createCourseItem();
+
+addToCartButtons();
