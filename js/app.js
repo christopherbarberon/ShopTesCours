@@ -41,7 +41,7 @@ function addToCartClicked(event) {
         title: title,
         price: price,
         src: src,
-        quantite: 1
+        stock: 1
     });
     localStorage.setItem('panier', JSON.stringify(panier));
     addItemToCart(src, title, price, dataId);
@@ -139,12 +139,13 @@ function Mymsg(msg,duration, px) {
 
 function addOrderButton() {
     var cart = document.getElementById('cart');
+    var emptyCart = document.getElementById('empty-cart');
     var buttonOrder = document.createElement('a');
     buttonOrder.setAttribute('href', 'commande.html');
     buttonOrder.setAttribute('class', 'button u-full-width');
     buttonOrder.setAttribute('id', 'buttonOrder');
     buttonOrder.innerHTML = 'Commander';
-    cart.appendChild(buttonOrder);
+    cart.insertBefore(buttonOrder, emptyCart);
 }
 
 function createCourseItem() {
