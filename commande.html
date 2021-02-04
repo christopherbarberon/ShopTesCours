@@ -1,0 +1,56 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Finaliser la commande</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+  <header id="header" class="header">
+    <div class="container">
+      <div class="row">
+        <div class="four columns logo">
+          <img src="img/coding_factory.jpg" id="logo">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="courses-list">
+    <h1>Finaliser la commande</h1>
+  </div>
+
+  <div class="container-fluid marginTop">
+    <div id="blocOrder">
+        <form id="formOrder">
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" class="form-control" id="name" placeholder="Nom & Prénom" required>
+            </div>
+            <div class="form-group">
+                <label>Adresse Postale</label>
+                <input type="email" class="form-control" id="adresse" required>
+            </div>
+            <div class="form-group form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="option1" id="abonnement" required>
+                <label class="form-check-label" for="abonews">M'abonner à la newsletter</label>
+            </div>
+            <div class="form-group form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" value="option2">
+                <label class="form-check-label" for="aborien">Ne pas m'abonner</label>
+            </div>
+            <button type="submit" id="submit">Commander</button>
+        </form>
+    </div>
+  </div>
+
+  <script src="js/commande.js"></script>
+
+</body>
+</html>

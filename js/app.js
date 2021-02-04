@@ -75,11 +75,12 @@ function getLocalStorage() {
 function clearCart() {
     let buttonclearCart = document.getElementById('empty-cart');
     let cartTableBody = document.getElementById('cart-table');
+    let px = 0;
     buttonclearCart.addEventListener('click', event => {
         localStorage.clear();
         var tbody = cartTableBody.childNodes[3];
         tbody.innerHTML = "";
-        Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000);
+        Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000, px);
     }) 
     
 }
@@ -109,3 +110,16 @@ function Mymsg(msg,duration, px) {
     setTimeout(function(){ alt.parentNode.removeChild(alt);},duration);
     document.body.appendChild(alt);
 }
+
+function addOrderButton() {
+    var cart = document.getElementById('cart');
+    var buttonOrder = document.createElement('a');
+    buttonOrder.setAttribute('href', 'commande.html');
+    buttonOrder.setAttribute('class', 'button u-full-width');
+    buttonOrder.innerHTML = 'Commander';
+    cart.appendChild(buttonOrder);
+}
+addOrderButton();
+
+
+
