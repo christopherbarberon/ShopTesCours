@@ -5,10 +5,7 @@ function addToCartButtons() {
         var button = addToCartButtons[i]
         var px = 0;
         button.addEventListener('click', event => {
-            let panier = getLocalStorage();
             let id = event.target.getAttribute('data-id');
-            panier.push(id);
-            localStorage.setItem('panier', JSON.stringify(panier));
             addToCartClicked(event);
 
             if (px <= 60) {
@@ -38,15 +35,23 @@ function addToCartClicked(event) {
     var getImg = shopItem.parentNode;
     var img = getImg.getElementsByTagName('img')[0];
     var src = img.getAttribute('src');
-    addItemToCart(src, title, price);
-
+    let panier = getLocalStorage();
+    panier.push({
+        id: dataId,
+        title: title,
+        price: price,
+        src: src,
+        quantite: 1
+    });
+    localStorage.setItem('panier', JSON.stringify(panier));
+    addItemToCart(src, title, price, dataId);
 }
-
+    
 // Add items to cart 
 // Param img (Src) : corresponds to the image of the course
 // Param title(String) : corresponds to the title of the course
 // Param price(String) : corresponds to the price of the course
-function addItemToCart(img, title, price) {
+function addItemToCart(img, title, price, dataId) {
     var cartTableBody = document.getElementsByTagName('tbody')[0];
     var newTr = cartTableBody.insertRow(-1);
     var newTdImg = newTr.insertCell(0);
@@ -59,6 +64,14 @@ function addItemToCart(img, title, price) {
     newTdPrice.innerHTML = price;
     var newTdQuantity = newTr.insertCell(-1);
     newTdQuantity.innerHTML = "1";
+    var newBtnDelete = newTr.insertCell(-1);
+    var del = document.createElement('button');
+    del.setAttribute('style', 'background-color:#E74C3C; color:white;');
+    del.setAttribute('class', 'btnDelete');
+    del.setAttribute('data-id', dataId);
+    del.innerHTML = 'Supprimer';
+    newBtnDelete.appendChild(del);
+    removeCartItemButtons();
 }
 
 // Backup of the cart thanks to localStorage
@@ -79,21 +92,38 @@ function clearCart() {
         tbody.innerHTML = "";
         Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000, px);
     }) 
-    
 }
-
-clearCart();
 
 // Display the localStorage information in the shopping cart after refreshing the page
 function retrieveCart() {
     var panier = getLocalStorage();
     for (var i = 0; i < panier.length; i++) {
-        var src = "../img/courses/" + COURSES[panier[i]].img;
-        addItemToCart(src, COURSES[panier[i]].title, COURSES[panier[i]].price);
+        addItemToCart(panier[i].src, panier[i].title, panier[i].price, panier[i].id);
     }
 }
 
-retrieveCart();
+function removeCartItemButtons() {
+    var removeCartItemButtons = document.getElementsByClassName('btnDelete');
+    for (var i = 0; i < removeCartItemButtons.length; i++) {
+        var button = removeCartItemButtons[i];
+        button.addEventListener('click', event => {
+            removeCartItem(event);
+        });
+    }
+}
+    
+function removeCartItem(event) {
+    var buttonClicked = event.target;
+    var panier = getLocalStorage();
+    for (let i = 0; i < panier.length; i++) {
+        if (panier[i].id === buttonClicked.getAttribute('data-id')) {
+            panier.splice(i, 1);
+            break;
+        }
+    }
+    localStorage.setItem("panier", JSON.stringify(panier));
+    buttonClicked.parentElement.parentElement.remove();
+}
 
 // Display a notification when an item is added to the cart
 // Param msg(String) : corresponds to the message of the notification
@@ -115,21 +145,7 @@ function addOrderButton() {
     buttonOrder.setAttribute('id', 'buttonOrder');
     buttonOrder.innerHTML = 'Commander';
     cart.appendChild(buttonOrder);
-
-/*
-    var panier = getLocalStorage();
-    var buttonOrder = getElementById('buttonOrder');
-    if (panier.length == 0) {
-        console.log('DANS LE IF ' + panier.length);
-        buttonOrder.setAttribute('href', 'javascript: void(0)');
-    } else {
-        console.log('DANS LE ELSE ' + panier.length);
-        buttonOrder.setAttribute('href', 'commande.html');
-    }
-*/
 }
-
-addOrderButton();
 
 function createCourseItem() {
     var coursesContainer = document.getElementsByClassName('courses__container')[0];
@@ -198,6 +214,8 @@ function createCourseItem() {
     }
 }
 
+clearCart();
+retrieveCart();
+addOrderButton();
 createCourseItem();
-
 addToCartButtons();
