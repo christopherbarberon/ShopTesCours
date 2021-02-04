@@ -79,7 +79,7 @@ function clearCart() {
         localStorage.clear();
         var tbody = cartTableBody.childNodes[3];
         tbody.innerHTML = "";
-        Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000,15);
+        Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000, px);
     }) 
     
 }
