@@ -10,7 +10,6 @@ function addToCartButtons() {
             panier.push(id);
             localStorage.setItem('panier', JSON.stringify(panier));
             addToCartClicked(event);
-            console.log(panier);
 
             if (px <= 60) {
                 if (px == 0) {
@@ -75,11 +74,12 @@ function getLocalStorage() {
 function clearCart() {
     let buttonclearCart = document.getElementById('empty-cart');
     let cartTableBody = document.getElementById('cart-table');
+    let px = 0;
     buttonclearCart.addEventListener('click', event => {
         localStorage.clear();
         var tbody = cartTableBody.childNodes[3];
         tbody.innerHTML = "";
-        Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000);
+        Mymsg("Vous avez supprimé tous les articles de votre panier ! ", 3000,15);
     }) 
     
 }
@@ -102,10 +102,22 @@ retrieveCart();
 // Param duration(int) : corresponds to the duration of the notification
 // Param px(int) : corresponds to the position of the notification, starting from the top
 function Mymsg(msg,duration, px) {
-    console.log(px)
     var alt = document.createElement("div");
     alt.setAttribute("style","position:absolute;top:"+px+"%;left:80%;border:1px solid rgba(0,0,0,0.25);padding:1% 5% 1% 5%;box-shadow:0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);margin-right:1%;margin-top:1%");
     alt.innerHTML = msg;
     setTimeout(function(){ alt.parentNode.removeChild(alt);},duration);
     document.body.appendChild(alt);
 }
+
+function addOrderButton() {
+    var cart = document.getElementById('cart');
+    var buttonOrder = document.createElement('a');
+    buttonOrder.setAttribute('href', 'commande.html');
+    buttonOrder.setAttribute('class', 'button u-full-width');
+    buttonOrder.innerHTML = 'Commander';
+    cart.appendChild(buttonOrder);
+}
+addOrderButton();
+
+
+

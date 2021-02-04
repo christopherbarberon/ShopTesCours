@@ -1,0 +1,10 @@
+var blocContact = document.getElementById('blocOrder');
+blocContact.setAttribute('style', "display:flex;justify-content:center;align-items:center;");
+var formContact = document.getElementById('formOrder');
+formContact.setAttribute('style', "padding: 20px;border: 1px solid #ccc;border-radius: 5px;width:400px;");
+var submit = document.getElementById('submit');
+submit.setAttribute('style', "width: 100%;");
+var caseName = document.getElementById('name');
+caseName.setAttribute('style', "background-color: #f8f9fa;");
+var caseAdresse = document.getElementById('adresse');
+caseAdresse.setAttribute('style', "background-color: #f8f9fa;");
