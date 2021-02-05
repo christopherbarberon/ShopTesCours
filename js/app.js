@@ -102,6 +102,7 @@ function retrieveCart() {
     }
 }
 
+// Delete button event management 
 function removeCartItemButtons() {
     var removeCartItemButtons = document.getElementsByClassName('btnDelete');
     for (var i = 0; i < removeCartItemButtons.length; i++) {
@@ -112,6 +113,8 @@ function removeCartItemButtons() {
     }
 }
     
+// Deletion of a course from the cart and localStorage
+// Param event(object) : corresponds to the event produced at the time of the click
 function removeCartItem(event) {
     var buttonClicked = event.target;
     var panier = getLocalStorage();
@@ -137,6 +140,7 @@ function Mymsg(msg,duration, px) {
     document.body.appendChild(alt);
 }
 
+// Allows you to create an "order" button
 function addOrderButton() {
     var cart = document.getElementById('cart');
     var emptyCart = document.getElementById('empty-cart');
@@ -148,75 +152,39 @@ function addOrderButton() {
     cart.insertBefore(buttonOrder, emptyCart);
 }
 
+addOrderButton();
+
+// Creation of the DOM dynamically
 function createCourseItem() {
     var coursesContainer = document.getElementsByClassName('courses__container')[0];
 
+function createCourseItem() {
     for (var i = 1; i < Object.keys(COURSES).length+1; i++) {
-        var newDivCourseItem = document.createElement('div');
-        newDivCourseItem.setAttribute('class', 'course__item');
-        coursesContainer.appendChild(newDivCourseItem);
-
-        var newFigureCours = document.createElement('figure');
-        newFigureCours.setAttribute('class', 'course_img');
-        newDivCourseItem.appendChild(newFigureCours);
-
-        var newImgCours = document.createElement('img');
-        newImgCours.setAttribute('src', 'img/courses/' + COURSES[i].img);
-        newFigureCours.appendChild(newImgCours);
-
-        var newDivInfoCard = document.createElement('div');
-        newDivInfoCard.setAttribute('class', 'info__card');
-        newDivCourseItem.appendChild(newDivInfoCard);
-
-        var newTitle = document.createElement('h4');
-        newTitle.innerHTML = COURSES[i].title;
-        newDivInfoCard.appendChild(newTitle);
-
-        var newFigureMark = document.createElement('figure');
-        newFigureMark.setAttribute('class', 'mark m_' + COURSES[i].mark);
-        newDivInfoCard.appendChild(newFigureMark);
-
-        var newImgRates = document.createElement('img');
-        newImgRates.setAttribute('src', 'img/rates.png');
-        newFigureMark.appendChild(newImgRates);
-
-        var newPPrice = document.createElement('p');
-        newDivInfoCard.appendChild(newPPrice);
-        
-        var newSpanPrice = document.createElement('span');
-        newSpanPrice.setAttribute('class', 'price');
-        newSpanPrice.innerHTML = COURSES[i].initial_price;
-        newPPrice.appendChild(newSpanPrice);
-
-        var newSpanDiscount = document.createElement('span');
-        newSpanDiscount.setAttribute('class', 'discount');
-        newSpanDiscount.innerHTML = COURSES[i].price;
-        newPPrice.appendChild(newSpanDiscount);
-
-        var newPQuantity = document.createElement('p');
-        newDivInfoCard.appendChild(newPQuantity);
-
-        var newSpanQuantity = document.createElement('span');
-        newSpanQuantity.setAttribute('class', 'stock');
-        newSpanQuantity.innerHTML = 'Disponible: ' + COURSES[i].stock;
-        newPQuantity.appendChild(newSpanQuantity);
-        
-        newAAddToCart = document.createElement('a');
-        newAAddToCart.setAttribute('href', '#');
-        newAAddToCart.setAttribute('class', 'add-to-cart');
-        newAAddToCart.setAttribute('data-id', COURSES[i].id);
-        newAAddToCart.innerHTML = 'Ajouter au panier ';
-
-        newIFa = document.createElement('i');
-        newIFa.setAttribute('class', 'fa fa-cart-plus');
-
-        newAAddToCart.appendChild(newIFa);
-        newDivInfoCard.appendChild(newAAddToCart);
+        console.log(COURSES[i]);
     }
 }
 
-clearCart();
-retrieveCart();
-addOrderButton();
 createCourseItem();
-addToCartButtons();
+
+/*
+<div class="course__item">
+      <figure class="course_img">
+        <img src="img/courses/ux_ui.jpg">
+      </figure>
+      <div class="info__card">
+        <h4>UX/UI</h4>
+        <figure class="mark m_4">
+          <img src="img/rates.png">
+        </figure>
+        <p>
+          <span class="price">200 €</span>
+          <span class="discount">9.99 €</span>
+        </p>
+        <p>
+          Disponible: <span class="stock">10</span>
+        </p>
+        <a href="#" class="add-to-cart" data-id="1"><i class="fa fa-cart-plus"></i>Ajouter au panier</a>
+      </div>
+    </div>
+
+    */
