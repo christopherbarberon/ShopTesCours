@@ -102,6 +102,7 @@ function retrieveCart() {
     }
 }
 
+// Delete button event management 
 function removeCartItemButtons() {
     var removeCartItemButtons = document.getElementsByClassName('btnDelete');
     for (var i = 0; i < removeCartItemButtons.length; i++) {
@@ -112,6 +113,8 @@ function removeCartItemButtons() {
     }
 }
     
+// Deletion of a course from the cart and localStorage
+// Param event(object) : corresponds to the event produced at the time of the click
 function removeCartItem(event) {
     var buttonClicked = event.target;
     var panier = getLocalStorage();
@@ -137,6 +140,7 @@ function Mymsg(msg,duration, px) {
     document.body.appendChild(alt);
 }
 
+// Addition of the order button
 function addOrderButton() {
     var cart = document.getElementById('cart');
     var emptyCart = document.getElementById('empty-cart');
@@ -148,6 +152,7 @@ function addOrderButton() {
     cart.insertBefore(buttonOrder, emptyCart);
 }
 
+// Creation of the DOM dynamically
 function createCourseItem() {
     var coursesContainer = document.getElementsByClassName('courses__container')[0];
 
