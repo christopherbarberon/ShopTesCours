@@ -140,7 +140,7 @@ function Mymsg(msg,duration, px) {
     document.body.appendChild(alt);
 }
 
-// Allows you to create an "order" button
+// Addition of the order button
 function addOrderButton() {
     var cart = document.getElementById('cart');
     var emptyCart = document.getElementById('empty-cart');
@@ -151,8 +151,6 @@ function addOrderButton() {
     buttonOrder.innerHTML = 'Commander';
     cart.insertBefore(buttonOrder, emptyCart);
 }
-
-addOrderButton();
 
 // Creation of the DOM dynamically
 function createCourseItem() {
